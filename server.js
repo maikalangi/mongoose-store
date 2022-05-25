@@ -27,7 +27,9 @@ app.use(morgan('dev'));
 // =========ROUTES/CONTROLLERS============
 // INDEX
 app.get('/store', (req, res)=>{
-    res.render('index.ejs', { Product });
+    Product.find({}, (error, allProduct)=>{
+        res.render('index.ejs', { product: allProduct });
+    });
 });
 
 // NEW
