@@ -14,15 +14,15 @@
     </nav>
     <h1>Shop</h1>
     <ul>
-        <% for( let i = 0; i < product.length; i++ ) { %>
+        <% product.forEach(product => { %>
             <li>
-                <a href="/store/<%= i %> ">
-                    <%= product[i].name %>
-                    <img src="<%= product[i].img %> " alt="<%= product[i].name %> ">
+                <a href="/store/<%= product._id %> ">
+                    <%= product.name %>
+                    <img src="<%= product.img %> " alt="<%= product.name %> ">
                 </a>
-                Price: $<%= product[i].price %>
+                Price: $<%= product.price %>
             </li>
-        <% } %>
+        <% }) %> 
     </ul>
 
 </body>
