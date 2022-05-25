@@ -11,7 +11,9 @@ const app = express();
 const PORT = process.env.PORT;
 
 // INDEX
-
+app.get('/store', (req, res)=>{
+    res.render('index.ejs');
+});
 // NEW
 
 // DELETE
