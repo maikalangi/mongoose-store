@@ -7,15 +7,20 @@
     <title>Mongoose Store</title>
 </head>
 <body>
+    <nav>
+        <a href="/store/new">
+            Add a new product
+        </a>
+    </nav>
     <h1>Shop</h1>
     <ul>
         <% for( let i = 0; i < product.length; i++ ) { %>
             <li>
                 <a href="/store/<%= i %> ">
                     <%= product[i].name %>
-                    <img src="<%= product[i].img %> " alt="<%= product[i] %> ">
-                    Price: $<%= product[i].price %>
+                    <img src="<%= product[i].img %> " alt="<%= product[i].name %> ">
                 </a>
+                Price: $<%= product[i].price %>
             </li>
         <% } %>
     </ul>

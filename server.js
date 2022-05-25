@@ -50,10 +50,9 @@ app.put('/store/:id', (req, res)=>{
 // CREATE
 app.post('/store', (req, res)=>{
     Product.create(req.body, (error, newProduct) => {
-        res.send(newProduct);
-        // res.send(req.body);
+        res.redirect('/store');
+        // res.send(newProduct);
     });
-    res.redirect('/store');
 });
 
 // EDIT
@@ -63,7 +62,11 @@ app.get('/store/:id/edit', (req, res)=>{
 
 // SHOW
 app.get('/store/:id', (req, res)=>{
-    res.render('show.ejs');
+    Product.findById(req.params.id, (error, index)=>{
+        res.render('show.ejs', {
+            index: index,
+        });
+    });
 });
 
 // ========================================
