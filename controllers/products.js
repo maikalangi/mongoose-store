@@ -5,6 +5,13 @@ const Product = require('../models/product');
 const router = express.Router();
 
 // SEED DATA
+const productSeed = require('../models/productSeed');
+router.get('/seed', (req, res)=>{
+    Product.deleteMany({}, (error, allProducts) =>{});
+    Product.create(productSeed, (error, data)=>{
+        res.redirect('/store');
+    });
+});
 
 // =========ROUTES/CONTROLLERS============
 // INDEX
@@ -21,12 +28,23 @@ router.get('/new', (req, res)=>{
 
 // DELETE
 router.delete('/:id', (req, res)=>{
-    res.redirect('/store');
+    Product.findByIdAndDelete(req.params.id, (error, data)=>{
+        res.redirect('/store');
+    });
 });
 
 // UPDATE
 router.put('/:id', (req, res)=>{
-    res.redirect('/store/:id');
+    Product.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+            new: true, //FBIAU defaults to new: false which returns old data. making it return true will make explicit that you want the updated data
+        },
+        (error, updatedProduct)=>{
+            res.redirect('/store/:id');
+        }
+    );
 });
 
 // CREATE
