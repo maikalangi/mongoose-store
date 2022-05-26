@@ -5,13 +5,13 @@ const Product = require('../models/product');
 const router = express.Router();
 
 // SEED DATA
-const productSeed = require('../models/productSeed');
-router.get('/seed', (req, res)=>{
-    Product.deleteMany({}, (error, allProducts) =>{});
-    Product.create(productSeed, (error, data)=>{
-        res.redirect('/store');
-    });
-});
+// const productSeed = require('../models/productSeed');
+// router.get('/seed', (req, res)=>{
+//     Product.deleteMany({}, (error, allProducts) =>{});
+//     Product.create(productSeed, (error, data)=>{
+//         res.redirect('/store');
+//     });
+// });
 
 // =========ROUTES/CONTROLLERS============
 // INDEX
@@ -42,7 +42,7 @@ router.put('/:id', (req, res)=>{
             new: true, //FBIAU defaults to new: false which returns old data. making it return true will make explicit that you want the updated data
         },
         (error, updatedProduct)=>{
-            res.redirect('/store/:id');
+            res.redirect(`/store/${req.params.id}`);
         }
     );
 });
@@ -51,13 +51,16 @@ router.put('/:id', (req, res)=>{
 router.post('/', (req, res)=>{
     Product.create(req.body, (error, newProduct) => {
         res.redirect('/store');
-        // res.send(newProduct);
     });
 });
 
 // EDIT
 router.get('/:id/edit', (req, res)=>{
-    res.render('edit.ejs');
+    Product.findById(req.params.id, (error, foundProduct)=>{
+        res.render('edit.ejs', {
+            product: foundProduct,
+        });
+    });
 });
 
 // SHOW

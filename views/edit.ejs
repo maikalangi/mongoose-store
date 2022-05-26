@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include ('./partials/head.ejs') %> 
     <title>Edit Product</title>
 </head>
 <body>
+    <nav>
+        <a href="/store">
+            Back to store
+        </a>
+        <br/>
+        <a href="/store/<%= product._id %>">
+            Back to <%= product.name %> page
+        </a>
+    </nav>
     <h1>Edit Product</h1>
-    
+    <img src="<%= product.img %>" alt="<%= product.name %> ">
+    <form id='container' action="/store/<%= product._id %>?_method=PUT" method="POST">
+        Name: <input type="text" name="name" value="<%= product.name %>"><br/>
+        Description: <input type="text" name="description" value="<%= product.description %> "><br/>
+        Price: <input type="number" name="price" value="<%= product.price %> "><br/>
+        Quantity: <input type="number" name="qty" value="<%= product.qty %> "><br/>
+        <br/>
+        <input type="submit" value="Submit Changes">
+    </form>
 </body>
 </html>
