@@ -25,7 +25,7 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 // MIDDLEWARE
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-app.use(mO(''))
+app.use(mO('_method'));
 app.use('/store', productController);
 
 // ========================================

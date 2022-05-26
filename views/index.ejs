@@ -21,6 +21,9 @@
                     <img src="<%= product.img %> " alt="<%= product.name %> ">
                 </a>
                 Price: $<%= product.price %>
+                <form action="/store/<%= product._id %>?_method=DELETE" method="POST">
+                    <input type="submit" value="delete">
+                </form>
             </li>
         <% }) %> 
     </ul>
